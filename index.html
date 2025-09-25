@@ -279,10 +279,11 @@ select {
     const bandwidth = 150;
 
     const svg = d3.select("#skaPlot")
-  .attr("width", "100%")   // responsive
+  .attr("width", document.getElementById("skaPlot").clientWidth) // numeric width in px
   .attr("height", 200);
 
     const width = +svg.attr("width");
+    const height = +svg.attr("height");
     const height = +svg.attr("height");
     const margin = { left: 40, right: 40 };
     const rectY = 50;
