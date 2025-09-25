@@ -129,55 +129,86 @@ select {
   .top-sections .section {
     flex: 1;  /* each takes half width */
   }
+
+    /* New row containers */
+  .row-sections {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Allow sections to flex */
+  .row-sections .section {
+    flex: 1;
+  }
+
+  /* Special layout for frequency row: 2/3 + 1/3 */
+  .freq-row .frequency {
+    flex: 2;
+  }
+  .freq-row .spectral {
+    flex: 1;
+  }
   </style>
 </head>
 <body>
   <div class="container">
 
-<!-- Top two cards side by side -->
-<div class="top-sections">
-  <!-- Observation Setup -->
-  <div class="section">
-    <h2>Observation Setup</h2>
-    <div class="row">
-      <div class="field">
-        <label>Observation ID</label>
-        <input type="text" placeholder="obs-XXXX">
-        <small class="helper">Unique identifier for the observation</small>
-      </div>
-      <div class="field">
-        <label>Group</label>
-        <select>
-          <option>None</option>
-        </select>
-        <small class="helper">Assign to an observation group</small>
-      </div>
-    </div>
-  </div>
-
-  <!-- Array Setup -->
-  <div class="section">
-    <h2>Array Setup</h2>
-    <div class="row">
-      <div class="field">
-        <label>Subarray Config</label>
-        <select>
-          <option>AA2</option>
-        </select>
-        <small class="helper">Select the subarray configuration</small>
-      </div>
-      <div class="field">
-        <label>Minimum Elevation (deg)</label>
-        <input type="number" value="20">
-        <small class="helper">Minimum elevation of target above horizon</small>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <!-- Frequency Setup -->
+  <!-- Row 1: three cards -->
+  <div class="row-sections">
+    <!-- Observation Setup -->
     <div class="section">
+      <h2>Observation Setup</h2>
+      <div class="row">
+        <div class="field">
+          <label>Observation ID</label>
+          <input type="text" placeholder="obs-XXXX">
+          <small class="helper">Unique identifier for the observation</small>
+        </div>
+        <div class="field">
+          <label>Group</label>
+          <select>
+            <option>None</option>
+          </select>
+          <small class="helper">Assign to an observation group</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Array Setup -->
+    <div class="section">
+      <h2>Array Setup</h2>
+      <div class="row">
+        <div class="field">
+          <label>Subarray Config</label>
+          <select>
+            <option>AA2</option>
+          </select>
+          <small class="helper">Select the subarray configuration</small>
+        </div>
+        <div class="field">
+          <label>Minimum Elevation (deg)</label>
+          <input type="number" value="20">
+          <small class="helper">Minimum elevation of target above horizon</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temporal Setup -->
+    <div class="section">
+      <h2>Temporal Setup</h2>
+      <div class="field">
+        <label>Integration Time (h)</label>
+        <input type="number" value="1">
+        <small class="helper">Total time of integration</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Frequency + Spectral -->
+  <div class="row-sections freq-row">
+    <!-- Frequency Setup -->
+    <div class="section frequency">
       <h2>Frequency Setup</h2>
       <div class="field">
         <label>Observing Band</label>
@@ -205,7 +236,7 @@ select {
     </div>
 
     <!-- Spectral Setup -->
-    <div class="section">
+    <div class="section spectral">
       <h2>Spectral Setup</h2>
       <div class="field">
         <label>Observation Type</label>
@@ -232,18 +263,9 @@ select {
         <small class="helper">Divide the full bandwidth into sub-bands</small>
       </div>
     </div>
-
-    <!-- Temporal Setup -->
-    <div class="section">
-      <h2>Temporal Setup</h2>
-      <div class="field">
-        <label>Integration Time (h)</label>
-        <input type="number" value="1">
-        <small class="helper">Total time of integration</small>
-      </div>
-    </div>
-
   </div>
+
+</div>
 
   <script>
     // SKA-Low band in MHz
