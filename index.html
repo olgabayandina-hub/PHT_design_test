@@ -13,12 +13,16 @@
       color: #333;
       line-height: 1.5;
     }
-
     .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  max-width: 1400px;   /* wider page */
+  margin: 0 auto;
+}
 
+#skaPlot {
+  width: 100%;    /* fill parent instead of fixed pixels */
+  height: 200px;  /* a bit taller so labels don’t overlap */
+  margin: 1rem 0;
+}
     h2 {
       font-size: 1.2rem;
       margin-bottom: 1rem;
@@ -275,8 +279,8 @@ select {
     const bandwidth = 150;
 
     const svg = d3.select("#skaPlot")
-      .attr("width", 800)
-      .attr("height", 150);
+  .attr("width", "100%")   // responsive
+  .attr("height", 200);
 
     const width = +svg.attr("width");
     const height = +svg.attr("height");
