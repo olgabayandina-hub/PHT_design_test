@@ -223,7 +223,8 @@ select {
       </div>
 
       <!-- Static Illustration -->
-      <svg id="skaPlot"></svg>
+<svg id="skaPlot" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid meet"></svg>
+
 
       <div class="row">
         <div class="field">
@@ -273,79 +274,77 @@ select {
 
   <script>
     // SKA-Low band in MHz
-    const bandMin = 50;
-    const bandMax = 350;
-    const centralFreq = 200;
-    const bandwidth = 150;
+  const bandMin = 50;
+  const bandMax = 350;
+  const centralFreq = 200;
+  const bandwidth = 150;
 
-    const svg = d3.select("#skaPlot")
-  .attr("width", document.getElementById("skaPlot").clientWidth) // numeric width in px
-  .attr("height", 200);
+  // Fixed drawing space (internal coords)
+  const width = 800;
+  const height = 200;
+  const margin = { left: 40, right: 40 };
+  const rectY = 50;
+  const rectHeight = 40;
 
-    const width = +svg.attr("width");
-    const height = +svg.attr("height");
-    const height = +svg.attr("height");
-    const margin = { left: 40, right: 40 };
-    const rectY = 50;
-    const rectHeight = 40;
+  const svg = d3.select("#skaPlot");
 
-    const xScale = d3.scaleLinear()
-      .domain([bandMin, bandMax])
-      .range([margin.left, width - margin.right]);
+  const xScale = d3.scaleLinear()
+    .domain([bandMin, bandMax])
+    .range([margin.left, width - margin.right]);
 
-    svg.append("text")
-      .attr("class", "band-title")
-      .attr("x", width / 2)
-      .attr("y", 20)
-      .text("Low Band: 50–350 MHz");
+  svg.append("text")
+    .attr("class", "band-title")
+    .attr("x", width / 2)
+    .attr("y", 20)
+    .text("Low Band: 50–350 MHz");
 
-    // Band rectangle
-    svg.append("rect")
-      .attr("class", "band")
-      .attr("x", xScale(bandMin))
-      .attr("y", rectY)
-      .attr("width", xScale(bandMax) - xScale(bandMin))
-      .attr("height", rectHeight)
-      .attr("rx", 15)
-      .attr("ry", 15);
+  // Band rectangle
+  svg.append("rect")
+    .attr("class", "band")
+    .attr("x", xScale(bandMin))
+    .attr("y", rectY)
+    .attr("width", xScale(bandMax) - xScale(bandMin))
+    .attr("height", rectHeight)
+    .attr("rx", 15)
+    .attr("ry", 15);
 
-    // Highlighted bandwidth
-    const bwMin = centralFreq - bandwidth / 2;
-    const bwMax = centralFreq + bandwidth / 2;
+  // Highlighted bandwidth
+  const bwMin = centralFreq - bandwidth / 2;
+  const bwMax = centralFreq + bandwidth / 2;
 
-    svg.append("rect")
-      .attr("class", "band-highlight")
-      .attr("x", xScale(bwMin))
-      .attr("y", rectY)
-      .attr("width", xScale(bwMax) - xScale(bwMin))
-      .attr("height", rectHeight);
+  svg.append("rect")
+    .attr("class", "band-highlight")
+    .attr("x", xScale(bwMin))
+    .attr("y", rectY)
+    .attr("width", xScale(bwMax) - xScale(bwMin))
+    .attr("height", rectHeight);
 
-    // Central frequency line
-    svg.append("line")
-      .attr("class", "center-line")
-      .attr("x1", xScale(centralFreq))
-      .attr("x2", xScale(centralFreq))
-      .attr("y1", rectY)
-      .attr("y2", rectY + rectHeight);
+  // Central frequency line
+  svg.append("line")
+    .attr("class", "center-line")
+    .attr("x1", xScale(centralFreq))
+    .attr("x2", xScale(centralFreq))
+    .attr("y1", rectY)
+    .attr("y2", rectY + rectHeight);
 
-    // Labels
-    svg.append("text")
-      .attr("class", "freq-label")
-      .attr("x", xScale(bandMin))
-      .attr("y", rectY + rectHeight + 20)
-      .text("50 MHz");
+  // Labels
+  svg.append("text")
+    .attr("class", "freq-label")
+    .attr("x", xScale(bandMin))
+    .attr("y", rectY + rectHeight + 20)
+    .text("50 MHz");
 
-    svg.append("text")
-      .attr("class", "freq-label")
-      .attr("x", xScale(bandMax))
-      .attr("y", rectY + rectHeight + 20)
-      .text("350 MHz");
+  svg.append("text")
+    .attr("class", "freq-label")
+    .attr("x", xScale(bandMax))
+    .attr("y", rectY + rectHeight + 20)
+    .text("350 MHz");
 
-    svg.append("text")
-      .attr("class", "freq-label")
-      .attr("x", xScale(centralFreq))
-      .attr("y", rectY - 10)
-      .text("200 MHz");
+  svg.append("text")
+    .attr("class", "freq-label")
+    .attr("x", xScale(centralFreq))
+    .attr("y", rectY - 10)
+    .text("200 MHz");
   </script>
 </body>
 </html>
