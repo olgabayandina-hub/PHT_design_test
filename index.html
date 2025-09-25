@@ -20,7 +20,7 @@
 
 #skaPlot {
   width: 100%;    /* fill parent instead of fixed pixels */
-  height: 200px;  /* a bit taller so labels don’t overlap */
+  height: 300px;  /* a bit taller so labels don’t overlap */
   margin: 1rem 0;
 }
     h2 {
@@ -283,8 +283,8 @@ select {
   const width = 800;
   const height = 200;
   const margin = { left: 40, right: 40 };
-  const rectY = 50;
-  const rectHeight = 40;
+  const rectY = 40;
+  const rectHeight = 80;
 
   const svg = d3.select("#skaPlot");
 
@@ -329,10 +329,9 @@ select {
 
   // Labels
   svg.append("text")
-    .attr("class", "freq-label")
-    .attr("x", xScale(bandMin))
-    .attr("y", rectY + rectHeight + 20)
-    .text("50 MHz");
+   .attr("x", xScale(bandMin))
+   .attr("y", rectY + rectHeight + 30) // label below rectangle
+   .text("50 MHz");
 
   svg.append("text")
     .attr("class", "freq-label")
