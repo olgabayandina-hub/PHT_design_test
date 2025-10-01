@@ -19,8 +19,9 @@
 }
 
 #skaPlot {
-  width: 100%;    /* fill parent instead of fixed pixels */
-  height: 300px;  /* a bit taller so labels don’t overlap */
+  width: 100%;
+  height: auto;   /* keep aspect ratio */
+  max-height: 220px; /* optional cap so it doesn’t get too tall */
   margin: 1rem 0;
 }
     h2 {
@@ -283,8 +284,8 @@ select {
   const width = 900;
   const height = 200;
   const margin = { left: 40, right: 40 };
-  const rectY = 40;
-  const rectHeight = 80;
+  const rectY = 70;     
+  const rectHeight = 40; 
 
   const svg = d3.select("#skaPlot");
 
@@ -293,10 +294,15 @@ select {
     .range([margin.left, width - margin.right]);
 
   svg.append("text")
-    .attr("class", "band-title")
-    .attr("x", width / 2)
-    .attr("y", 20)
-    .text("Low Band: 50–350 MHz");
+   .attr("x", xScale(bandMin))
+   .attr("y", rectY + rectHeight + 25) // lower than before
+   .text("50 MHz");
+
+svg.append("text")
+   .attr("class", "freq-label")
+   .attr("x", xScale(bandMax))
+   .attr("y", rectY + rectHeight + 25)
+   .text("350 MHz");
 
   // Band rectangle
   svg.append("rect")
